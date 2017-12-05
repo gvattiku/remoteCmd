@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Strongly Connected Components</title>
+    <link rel="stylesheet" href="./bulma.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <nav class="nav has-shadow">
+      <div class="container">
+	<div class="nav-left">
+	  <a class="nav-item">
+	    <strong>Strongly Connected Components</strong>
+	  </a>
+	</div>
+	<span class="nav-toggle">
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	</span>
+
+	<!-- This "nav-menu" is hidden on mobile -->
+	<!-- Add the modifier "is-active" to display it on mobile -->
+	<div class="nav-right nav-menu">
+	  <a class="nav-item is-tab is-active" href="/">
+	    Home
+	  </a>
+	  <a class="nav-item is-tab">
+	    IEEE paper
+	  </a>
+	</div>
+      </div>
+    </nav>
+
+    <div class="container" id="main">
+      <div class="columns">
+	<div class="column">
+	  <div class="message is-primary">
+	    <div class="message-header">
+	      <h1>Abstract</h1>
+	    </div>
+	    <div class="message-body">
+	      <article class="content">
+		<p>
+		  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+		  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+		  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+		  nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+		  reprehenderit in voluptate velit esse cillum dolore eu fugiat
+		  nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+		  sunt in culpa qui officia deserunt mollit anim id est laborum.
+		</p>
+
+		<p>
+		  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+		  eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+		  enim ad minim veniam, quis nostrud exercitation ullamco laboris
+		  nisi ut aliquip ex ea commodo consequat.
+		</p>
+	      </article>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="column">
+	  <h1 class="title">Execute Shell Script</h1>
+
+	  <form action="execute" method="post" enctype="multipart/form-data">
+	    <div class="field">
+	      <p class="control">
+		<textarea name="input" class="textarea" placeholder="Enter the input to the shell script"></textarea>
+	      </p>
+	    </div>
+
+	    <div class="field">
+	      <p class="control">Or</p>
+	    </div>
+
+	    <div class="field">
+	      <p class="control">
+		<input type="file" name="file">
+	      </p>
+	    </div>
+
+	    <div class="field">
+	      <input type="submit" class="button is-primary is-fullwidth" value="Execute Shell Script">
+	    </div>
+	  </form>
+	</div>
+      </div>
+    </div>
+  </body>
+</html>

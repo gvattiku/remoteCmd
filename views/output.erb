@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Strongly Connected Components</title>
+    <link rel="stylesheet" href="./bulma.css">
+    <link rel="stylesheet" href="./style.css">
+
+    <style>
+     #cy {
+       width: 46%;
+       height: 300px;
+       position: absolute;
+     }
+
+     #cy-parent {
+       height: 340px;
+     }
+    </style>
+
+  </head>
+  <body>
+    <nav class="nav has-shadow">
+      <div class="container">
+	<div class="nav-left">
+	  <a class="nav-item">
+	    <strong>Strongly Connected Components</strong>
+	  </a>
+	</div>
+	<span class="nav-toggle">
+	  <span></span>
+	  <span></span>
+	  <span></span>
+	</span>
+
+	<!-- This "nav-menu" is hidden on mobile -->
+	<!-- Add the modifier "is-active" to display it on mobile -->
+	<div class="nav-right nav-menu">
+	  <a class="nav-item is-tab" href="/">
+	    Home
+	  </a>
+	  <a class="nav-item is-tab">
+	    IEEE paper
+	  </a>
+	</div>
+      </div>
+    </nav>
+
+    <div class="container" id="main">
+      <div class="columns">
+	<div class="column">
+	  <div class="message is-info">
+	    <div class="message-header">
+	      <h1>Input</h1>
+	    </div>
+	    <div class="message-body">
+	      <article class="content">
+		<p>
+		  <%= @input %>
+		</p>
+	      </article>
+	    </div>
+	  </div>
+
+	  <div class="message is-info">
+	    <div class="message-header">
+	      <h1>Input Graph</h1>
+	    </div>
+	    <div class="message-body" id="cy-parent">
+	      <div id="cy">
+	      </div>
+	    </div>
+	  </div>
+
+	</div>
+	<div class="column">
+
+	  <div class="message is-success">
+	    <div class="message-header">
+	      <h1>Output</h1>
+	    </div>
+	    <div class="message-body">
+	      <article class="content">
+		<p>
+		  <%= @output %>
+		</p>
+	      </article>
+	    </div>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <script src="cytoscape.js"></script>
+    <script>
+
+     var arr = [];
+     var a = [];
+     var b = [];
+     var p = [];
+     var q = [];
+     var index = 0;
+
+     var rows = "<%= @js_input %>".split('\r\n');
+
+     for (var i = 0; i < rows.length-1; i++) {
+       var elements = rows[i].split(/\s/);
+
+       arr[i] = new Array();
+
+       for(var j=0; j < elements.length; j++) {
+	 arr[i][j] = elements[j];
+
+	 if(j > 0) {
+	   q[i] = arr[i][j];
+	 } else {
+	   p[i] = arr[i][j];
+	 }
+
+	 for (var k = 0; k < q.length; k++) {
+	   a.push({
+	     data: {
+	       id: q[k],
+	       name: q[k]
+   	     }
+ 	   });
+	 }
+
+	 for (var k = 0; k < p.length; k++) {
+	   a.push({
+	     data: {
+	       id: p[k],
+	       name: p[k]
+	     }
+	   });
+	 }
+
+	 for (var k = 0; k < q.length; k++) {
+	   b.push({
+	     data: {
+	       source: p[k],
+	       target: q[k]
+	     }
+	   });
+	 }
+       }
+     }
+
+     var cy = cytoscape({
+       container: document.getElementById('cy'),
+       elements: {
+         nodes: a,
+         edges: b
+       },
+
+       layout: {
+         name: 'cose',
+	 padding: 10
+       },
+
+       style: [
+         {
+           selector: 'node',
+           style: {
+             shape: 'hexagon',
+             'background-color': 'blue',
+ 	     label: 'data(id)'
+           }
+	 },
+	 {
+	   selector: 'edge',
+	   style: {
+             'width': 4,
+             'target-arrow-shape': 'triangle',
+	     'line-color': '#9dbaea',
+             'target-arrow-color': '#9dbaea',
+             'curve-style': 'bezier'
+      	   }
+	 }
+       ]
+     });
+
+    </script>
+  </body>
+</html>
